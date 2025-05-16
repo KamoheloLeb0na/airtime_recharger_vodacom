@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>USSD Recharge | Lebona Executive Software</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --lebona-blue: #0056b3;
+      --lebona-dark: #1a1a2e;
+      --success: #28a745;
+      --error: #dc3545;
+      --light-bg: #f8f9fa;
+      --white: #ffffff;
+      --gray: #6c757d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--light-bg);
+      color: var(--lebona-dark);
+      min-height: 100vh;
+      padding: 16px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 100%;
+      width: 100%;
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .header {
+      
+      color: white;
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .logo {
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 20px 16px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-family: monospace;
+      letter-spacing: 1px;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--lebona-blue);
+      outline: none;
+    }
+
+    input[type="text"].valid {
+      border-color: var(--success);
+    }
+
+    button {
+      width: 100%;
+      background: var(--lebona-blue);
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: filter 0.2s;
+    }
+
+    button:active {
+      filter: brightness(0.9);
+    }
+
+    button:disabled {
+      background: #adb5bd;
+      cursor: not-allowed;
+    }
+
+    .digit-counter {
+      text-align: right;
+      font-size: 0.8rem;
+      margin-top: 4px;
+    }
+
+    .digit-counter.error {
+      color: var(--error);
+    }
+
+    .digit-counter.success {
+      color: var(--success);
+    }
+
+    .voucher-example {
+      font-size: 0.8rem;
+      color: var(--gray);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    #response {
+      margin-top: 20px;
+    }
+
+    .response-box, .error-box {
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+
+    .response-box {
+      background: rgba(40, 167, 69, 0.1);
+      border-left: 4px solid var(--success);
+    }
+
+    .error-box {
+      background: rgba(220, 53, 69, 0.1);
+      border-left: 4px solid var(--error);
+    }
+
+    .response-content {
+      white-space: pre-wrap;
+      margin: 10px 0;
+      font-family: monospace;
+      font-size: 0.95rem;
+    }
+
+    .ussd-code {
+      font-size: 0.85rem;
+      background: rgba(0, 0, 0, 0.05);
+      padding: 8px;
+      border-radius: 4px;
+      word-break: break-all;
+      margin-top: 10px;
+    }
+
+    details {
+      margin-top: 12px;
+    }
+
+    summary {
+      font-size: 0.85rem;
+      color: var(--lebona-blue);
+      cursor: pointer;
+    }
+
+    pre {
+      font-size: 0.75rem;
+      background: rgba(0, 0, 0, 0.05);
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+      margin-top: 8px;
+    }
+
+    .loading {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .footer {
+      text-align: center;
+      padding: 16px;
+      font-size: 0.95rem;
+      color: var(--gray);
+      border-top: 1px solid #eee;
+    }
+
+    /* Mobile-specific optimizations */
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+      }
+      
+      .header {
+        padding: 16px 12px;
+      }
+      
+      .content {
+        padding: 16px 12px;
+      }
+      
+      input[type="text"] {
+        font-size: 1rem;
+        padding: 12px 14px;
+      }
+      
+      button {
+        padding: 14px;
+      }
+      
+      .response-content {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Prevent iOS zoom on focus */
+    @media screen and (-webkit-min-device-pixel-ratio:0) {
+      select:focus,
+      textarea:focus,
+      input:focus {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      
+      <img src="logo_unite.png" style="width: 250px;" alt="">
+    </div>
+
+    <div class="content">
+      <form id="recharge-form">
+        <div class="form-group">
+          <label for="voucher-code">Voucher Code</label>
+          <input type="text" id="voucher-code" placeholder="00000000000000" inputmode="numeric" pattern="\d*" maxlength="14">
+          <div class="digit-counter"><span id="digit-count">0</span>/14 digits</div>
+          <div class="voucher-example">Example: 12345678901234</div>
+        </div>
+        
+        <button type="submit" id="submit-btn" disabled>
+          <span id="btn-loading" class="loading" style="display: none;"></span>
+          <span id="btn-text">Recharge Now</span>
+        </button>
+      </form>
+
+      <div id="status"></div>
+      <div id="response"></div>
+    </div>
+
+    <div class="footer">
+      © 2025 Lebona Executive Software
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

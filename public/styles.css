@@ -1,0 +1,307 @@
+    :root {
+      --primary: #800000; /* Maroon theme */
+      --primary-dark: #660000;
+      --success: #28a745;
+      --error: #dc3545;
+      --light-bg: #f8f9fa;
+      --white: #ffffff;
+      --gray: #6c757d;
+      --highlight: #ffe5e5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--light-bg);
+      color: #333;
+      min-height: 100vh;
+      padding: 0;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 100%;
+      width: 100%;
+      background: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header Styles */
+    .main-header {
+      background: var(--primary);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .header-subtitle {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 20px 16px;
+      flex: 1;
+    }
+
+    /* Data Package Styles */
+    .package-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .package-header {
+      font-weight: 600;
+      color: var(--primary);
+      margin: 15px 0 8px;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+
+    .package-option {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .package-option:hover {
+      border-color: var(--primary);
+    }
+
+    .package-option.selected {
+      border-color: var(--primary);
+      background: var(--highlight);
+    }
+
+    .package-title {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+
+    .package-price {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+
+    .package-data {
+      font-weight: 600;
+    }
+
+    .package-duration {
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+
+    /* Selected Package Display */
+    .selected-package-display {
+      display: none;
+      background: var(--highlight);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .change-package-link {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      color: var(--primary);
+      font-size: 0.85rem;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .recharge-amount {
+      font-weight: 600;
+      margin-top: 5px;
+      color: var(--primary);
+    }
+
+    /* Original voucher form styles (unchanged) */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-family: monospace;
+      letter-spacing: 1px;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+
+    input[type="text"].valid {
+      border-color: var(--success);
+    }
+
+    button {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: filter 0.2s;
+    }
+
+    button:active {
+      filter: brightness(0.9);
+    }
+
+    button:disabled {
+      background: #adb5bd;
+      cursor: not-allowed;
+    }
+
+    .digit-counter {
+      text-align: right;
+      font-size: 0.8rem;
+      margin-top: 4px;
+    }
+
+    .digit-counter.error {
+      color: var(--error);
+    }
+
+    .digit-counter.success {
+      color: var(--success);
+    }
+
+    .voucher-example {
+      font-size: 0.8rem;
+      color: var(--gray);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    #response {
+      margin-top: 20px;
+    }
+
+    .response-box, .error-box {
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+
+    .response-box {
+      background: rgba(40, 167, 69, 0.1);
+      border-left: 4px solid var(--success);
+    }
+
+    .error-box {
+      background: rgba(220, 53, 69, 0.1);
+      border-left: 4px solid var(--error);
+    }
+
+    .response-content {
+      white-space: pre-wrap;
+      margin: 10px 0;
+      font-family: monospace;
+      font-size: 0.95rem;
+    }
+
+    .loading {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Footer Styles */
+    .main-footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: var(--gray);
+      border-top: 1px solid #eee;
+      background: white;
+    }
+
+    .footer-text {
+      margin-bottom: 5px;
+    }
+
+    .copyright {
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    /* Mobile-specific optimizations */
+    @media (max-width: 480px) {
+      body {
+        padding: 0;
+      }
+      
+      .content {
+        padding: 16px 12px;
+      }
+      
+      input[type="text"] {
+        font-size: 1rem;
+        padding: 12px 14px;
+      }
+      
+      button {
+        padding: 14px;
+      }
+    }
+
+    #recharge-form {
+  display: none;
+}
+
+/* Add this to show it when needed */
+#recharge-form.visible {
+  display: block;
+}
